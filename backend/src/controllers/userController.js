@@ -1,5 +1,8 @@
-import User from './../models/User';
-import bcrypt from "bcrypt"
+import User from './../models/User.js';
+import bcrypt from "bcrypt";
+import validator from "validator";
+import jwt from 'jsonwebtoken';
+
 // API to register a user
 
 const registerUser = async(req,res) =>{
@@ -21,7 +24,7 @@ const registerUser = async(req,res) =>{
             return res.status(400).json({success: false, message: "Mobile already exists"});
 
         if(password.length < 6)
-            return res.status(400).json({success: false, message: "Passowrd length should be greater than 8!"});
+            return res.status(400).json({success: false, message: "Passowrd length should be greater than 6!"});
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -40,7 +43,18 @@ const registerUser = async(req,res) =>{
 
         const token = jwt.sign({id:user._id}, process.env.JWT_SECRET);
 
-        res.status(201).json({success: true, message: "User created"});
+        res.status(201).json({
+            success: true, 
+            token,
+            user:{
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                mobile: user.mobile,
+                city: user.city,
+                address: user.address
+            },
+            message: "User created"});
 
     } catch(error){
         console.log(error);
@@ -48,4 +62,40 @@ const registerUser = async(req,res) =>{
     }
 }
 
-export default registerUser
+// API to login a user
+
+const loginUser = async(req, res) =>{
+    try{
+        const {email, password} = req.body;
+
+        const user = await User.findOne({email});
+        if(!user)
+            return res.status(400).json({success: false, message: "Invalid email"});
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch)
+            return res.status(400).json({success: false, message: "Incorrect password"});
+        else{
+            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+            res.status(201).json({
+                success: true, 
+                token,
+                user:{
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                mobile: user.mobile,
+                city: user.city,
+                address: user.address
+                }
+            })
+        }
+    } catch(error){
+        console.log(error);
+        res.status(500).json({success: false, message: error.message})
+    }
+}
+
+
+
+export default {registerUser, loginUser};
