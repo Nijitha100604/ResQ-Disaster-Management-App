@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const volunteerSchema = new mongoose.Schema({
-    volunteerName:{
+    volunteername:{
         type: String,
         required: true
     },
@@ -26,10 +26,6 @@ const volunteerSchema = new mongoose.Schema({
         required: true
     },
     location:{
-        type: String,
-        required: true
-    },
-    category:{
         type: String,
         required: true
     }

@@ -98,4 +98,4 @@ const loginUser = async(req, res) =>{
 
 
 
-export default {registerUser, loginUser};
+export {registerUser, loginUser};
