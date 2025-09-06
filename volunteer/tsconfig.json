@@ -3,10 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-    "allowJs": true,                 
-    "checkJs": false, 
-    "module": "esnext", 
-    "forceConsistentCasingInFileNames": true,   
+    "allowJs": true,
+    "checkJs": false,
+    "module": "esnext",
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": [
         "./*"
@@ -16,11 +16,12 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",                       
-    "**/*.jsx", 
+    "**/*.js",
+    "**/*.jsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts", 
-    "app/index.jsx", 
-    "app/_layout.jsx"
+    "expo-env.d.ts",
+    "app/index.jsx",
+    "app/_layout.jsx",
+    "nativewind-env.d.ts"
   ]
 }

@@ -4,7 +4,8 @@ import { Image } from "expo-image";
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system"
+import * as FileSystem from "expo-file-system";
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -36,6 +37,8 @@ export default function Create() {
     const [description, setDescription] = useState("");
     const [image, setImage] = useState(null);
     const [imageBase64, setImageBase64] = useState(null);
+
+    const router = useRouter();
 
     const pickImage = async() =>{
     try{
@@ -72,6 +75,34 @@ export default function Create() {
       console.log("Error picking image", error);
       Alert.alert("Error", "There was a problem selecting your image");
     }
+  }
+
+  const handleSubmit = () =>{
+    if (!location || !severity || !description || !contact || !image) {
+      Alert.alert("Missing Info", "Please fill out all required fields.");
+      return;
+    }
+     Alert.alert("Success", "Incident created successfully", [
+    {
+      text: "OK",
+      onPress: () => router.push("/(tabs)"), 
+    },
+    ]);
+    setLocation("");
+    setSeverity(null);
+    setDescription("");
+    setContact("");
+    setImage(null);
+    setImageBase64("");
+  }
+
+  const handleCancel = () =>{
+    setLocation("");
+    setSeverity(null);
+    setContact("");
+    setDescription("");
+    setImage(null);
+    setImageBase64(null);
   }
 
 
@@ -220,11 +251,11 @@ export default function Create() {
             {/* Buttons */}
             <View className="mb-6 mt-4 flex-row justify-between ">
               {/* Cancel button */}
-              <TouchableOpacity className="bg-gray-300 px-6 py-3 rounded-lg">
+              <TouchableOpacity className="bg-gray-300 px-6 py-3 rounded-lg" onPress={handleCancel}>
                 <Text className="font-semibold text-center">Cancel</Text>
               </TouchableOpacity>
               {/* Submit */}
-              <TouchableOpacity className="bg-gray-900 px-6 py-3 rounded-lg">
+              <TouchableOpacity className="bg-gray-900 px-6 py-3 rounded-lg" onPress={handleSubmit}>
                 <Text className="text-white font-semibold text-center">Submit Incident </Text>
               </TouchableOpacity>
             </View>

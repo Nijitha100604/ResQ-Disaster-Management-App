@@ -96,6 +96,6 @@ const loginUser = async(req, res) =>{
     }
 }
 
-
+// API to create a incident
 
 export {registerUser, loginUser};
