@@ -15,8 +15,7 @@ const incidentSchema = new mongoose.Schema({
     },
     evidence:{
         type: String,
-        default: "",
-        required: true
+        default: ""
     },
     reportedBy:{
         type: mongoose.Schema.Types.ObjectId,
@@ -37,6 +36,10 @@ const incidentSchema = new mongoose.Schema({
             type: String,
             required: true
         }
+    },
+    status:{
+        type: String,
+        default: "In Progress"
     }
 }, {timestamps: true});
 

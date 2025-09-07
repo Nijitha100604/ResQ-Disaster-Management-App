@@ -41,6 +41,10 @@ const taskSchema = new mongoose.Schema({
     status:{
         type: String,
         default: "Assigned"
+    },
+    evidence:{
+        type: String,
+        default: ""
     }
 }, {timestamps: true});
 

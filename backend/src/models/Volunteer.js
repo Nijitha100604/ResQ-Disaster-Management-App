@@ -25,7 +25,7 @@ const volunteerSchema = new mongoose.Schema({
         default: "",
         required: true
     },
-    location:{
+    city:{
         type: String,
         required: true
     }

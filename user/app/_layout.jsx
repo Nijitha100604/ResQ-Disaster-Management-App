@@ -10,7 +10,7 @@ export default function RootLayout() {
   const segments = useSegments();
   const rootNavigation = useRootNavigationState();
 
-  const isSignedIn = false;
+  const isSignedIn = true;
 
   useEffect(() => {
     if (!rootNavigation?.key) return;

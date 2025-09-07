@@ -31,7 +31,7 @@ export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [mobile, setMobile] = useState("");
-    const [location, setLocation] = useState("");
+    const [city, setCity] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -154,7 +154,7 @@ export default function Signup() {
           {/* Location details */}
 
           <View className="mb-6">
-            <Text className="text-[14px] mb-4 text-gray-900 font-medium">Location <Text className="text-red-600">*</Text></Text>
+            <Text className="text-[14px] mb-4 text-gray-900 font-medium">City <Text className="text-red-600">*</Text></Text>
             <View className="flex-row items-center bg-gray-200 rounded-xl px-3">
               <Ionicons 
                 className="mr-5"
@@ -164,9 +164,9 @@ export default function Signup() {
               />
               <TextInput 
                 className="flex-1 h-14"
-                placeholder="City, State"
-                value={location}
-                onChangeText={setLocation}
+                placeholder="Enter your City"
+                value={city}
+                onChangeText={setCity}
               />
             </View>
           </View>
